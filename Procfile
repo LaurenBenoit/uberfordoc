@@ -1,0 +1,1 @@
+web: gunicorn uberfordoc.wsgi --log-file -
