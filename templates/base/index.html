@@ -13,18 +13,18 @@
     <title>A A S A N D O C T O R</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{%static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{%static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="static/css/agency.min.css" rel="stylesheet">
-
+    <link href="{%static "css/agency.min.css"%}" rel="stylesheet">
+    <link href="{%static "css/agency"%}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,37 +44,39 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="static/#page-top">AASANDOC</a>
+                <a class="navbar-brand page-scroll" href="/">AASANDOC</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                   {% block navigation %}
                     <li class="hidden">
-                        <a href="static/#page-top"></a>
+                        <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="static/#services">How It works</a>
+                        <a class="page-scroll" href="#services">How It works</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="static/#portfolio">Portfolio</a>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="static/#about">About</a>
+                        <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="static/#team">Team</a>
+                        <a class="page-scroll" href="#team">Team</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="static/#contact">Get Invited</a>
+                        <a class="page-scroll" href="#contact">Get Invited</a>
                     </li>
+                    {% endblock %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-
+        {% block main_content %}
     <!-- Header -->
     <header>
         <div class="container">
@@ -439,7 +441,7 @@
             </div>
         </div>
     </section>
-
+    {% endblock%}
     <footer>
         <div class="container">
             <div class="row">
