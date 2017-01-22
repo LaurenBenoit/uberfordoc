@@ -57,6 +57,13 @@ ROOT_URLCONF = 'uberfordoc.urls'
 
 TEMPLATES = [
     {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [os.path.join(MAIN_DIR, 'templates/jinja2')],
+        'APP_DIRS': True,
+        'OPTIONS': {'environment': 'uberfordoc.jinja2.environment',
+        }, 
+    },
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(MAIN_DIR,'templates')],
         'APP_DIRS': True,
@@ -70,6 +77,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'uberfordoc.wsgi.application'
 
@@ -135,8 +144,6 @@ STATIC_URL = '/static/'
 
 TEMPLATES_DIRS = (
     os.path.join(MAIN_DIR,'templates'),
-
-
     )
 
 STATICFILES_DIRS = (
@@ -145,3 +152,10 @@ os.path.join(MAIN_DIR, 'static'),
 
     )
 STATIC_ROOT = 'staticfiles'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_FORCE_HTTP_URL = True
+AWS_QUERYSTRING_AUTH = False
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWSSecretKey')
+AWS_ACCESS_KEY_ID = os.environ.get('AWSAccessKeyId')
+AWS_STORAGE_BUCKET_NAME = 'ufd'
