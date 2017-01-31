@@ -1,5 +1,15 @@
 {% extends "base/theme.html" %}
+{% block scripts %}
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="{{ STATIC_URL }}theme/js/gmaps.js"></script>
+<script src="{{ STATIC_URL }}theme/js/maps.js"></script>
+{% endblock %}
 {% block main_content %}
+<div class="data-layer">
+    <ul>
+        <li class="location-data" data-latitude="{{ location.position.latitude }}" data-longitude="{{ location.position.longitude }}">{{ location.title }}</li>
+    </ul>
+</div>
 <div class="row main-content" >
 	<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -18,8 +28,14 @@
 			{% include 'location/specifics.html' with location=location %}
 			<p>{{location.description}}</p>
 				{% if location.image_file %}
-					<img src="{{location.image_file.url}}"></img>
+					<img style="width:100%;max-width:400px;margin-bottom:0.3em;border:1px solid lightgrey" src="{{location.image_file.url}}"></img>
 				{% endif %}	
+			</div>
+			<div class="col-md-4 panel">
+				
+				<div class="wide-map short-map" id="map">HERE</div>
+				
+				
 			</div>
 			<div class="col-md-12">
 				<a type="button" href="{% url 'location_update' pk=location.id %}" class="btn btn-default pull-right">Edit</a>

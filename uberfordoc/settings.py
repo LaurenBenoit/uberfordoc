@@ -21,6 +21,7 @@ MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'r)q8y+tq0^w!)qs@&5&c5359&#fuicvb+-mxp@pck^sk%wt1df'
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyAmdSj9x0T2FvtOufyxTwzh49QOCO1lJLc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,7 +31,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,10 +41,13 @@ INSTALLED_APPS = (
     'addattr',
     'core',
     'widget_tweaks',
+    'sitegate',
+    'bootstrap3',
+    'geoposition',
+    'bootstrap_pagination',
+]
 
-)
-
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE= [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,7 +56,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-)
+]
 
 ROOT_URLCONF = 'uberfordoc.urls'
 
@@ -72,7 +76,6 @@ TEMPLATES = [
     },
 ]
 
-print (os.path.join(MAIN_DIR, 'templates'))
 
 WSGI_APPLICATION = 'uberfordoc.wsgi.application'
 
@@ -89,19 +92,19 @@ WSGI_APPLICATION = 'uberfordoc.wsgi.application'
 # Parse database configuration from $DATABASE_URL
 
 
-print "CHECKING_HEROKU!"
+#print "CHECKING_HEROKU!"
 ON_HEROKU = os.environ.get('ON_HEROKU') #<---- this captures the ON_HEROKU variable from the environment and assigns it to ON_HEROKU.
 
 
 if ON_HEROKU == '1':
 # Parse database configuration from $DATABASE_URL
     import dj_database_url
-    print "ON_HEROKU!"
+#    print "ON_HEROKU!"
     DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
     }
 else:
-    print "NOT_ON_HEROKU!"
+#    print "NOT_ON_HEROKU!"
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -128,7 +131,6 @@ else:
     }
 """
 
-
 #import dj_database_url
 #DATABASES['default'] =  dj_database_url.config()
 
@@ -152,6 +154,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request"
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -165,6 +177,7 @@ STATICFILES_DIRS = (
 os.path.join(MAIN_DIR, 'static'),
 
 )
+STATIC_ROOT = 'staticfiles'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_S3_FORCE_HTTP_URL = True

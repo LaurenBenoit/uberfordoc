@@ -2,6 +2,11 @@ boto==2.45.0
 dj-database-url==0.4.2
 dj-static==0.0.6
 Django==1.10.5
+django-bootstrap-pagination==1.6.2
+django-bootstrap3==8.1.0
+django-etc==0.9.2
+django-geoposition==0.3.0
+django-sitegate==0.12.1
 django-storages==1.5.2
 django-toolbelt==0.0.1
 django-widget-tweaks==1.4.1

@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
+from sitegate.decorators import redirect_signedin, sitegate_view
 
 import core.models as coremodels
 
@@ -16,6 +17,7 @@ class LandingView(TemplateView):
 class LocationListView(ListView):
 	model = coremodels.Location
 	template_name = 'location/list.html'
+	paginate_by = 2
 
 class SearchListView(LocationListView):
 	
@@ -76,6 +78,9 @@ class ReviewUpdateView(UpdateView):
 		return self.object.location.get_absolute_url() 
 
 
+@sitegate_view(widget_attrs={'class': 'form-control', 'placeholder': lambda f: f.label}, template='form_bootstrap3') # This also prevents logged in users from accessing our sign in/sign up page.
+def entrance(request):
+	return render(request, 'base/entrance.html', {'title': 'Sign in & Sign up'})
 
 
 	# def get_queryset(self):

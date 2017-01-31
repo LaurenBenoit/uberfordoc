@@ -3,6 +3,8 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db.models import Avg
+from geoposition.fields import GeopositionField
+
 import os
 import uuid
 
@@ -68,6 +70,7 @@ class Location(models.Model):
 	alcohol = models.IntegerField(choices=YESNO_CHOICES, null=True, blank=True)
 	outdoor = models.IntegerField(choices=YESNO_CHOICES, null=True, blank=True)
 	food = models.IntegerField(choices=YESNO_CHOICES, null=True, blank=True)
+	position = GeopositionField(null=True, blank=True)
 
 
 	def __unicode__(self):
